@@ -1,8 +1,10 @@
 require "./api-crystal/*"
 
 module Api::Crystal
+  @@Config : YAML::Any = YAML.parse("")
   begin
-    Api::Crystal::Config.load("config.yaml")
+    @@Config = Api::Crystal::Config.load("config.yaml")
+    Api::Crystal::Net.listen
   rescue ex
     puts ex
   end
